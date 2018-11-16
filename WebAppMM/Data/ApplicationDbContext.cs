@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using WebAppMM.Models;
 
 namespace WebAppMM.Data
 {
@@ -12,5 +13,6 @@ namespace WebAppMM.Data
             : base(options)
         {
         }
+        public DbSet<WebAppMM.Models.Place> Places { get; set; }
     }
 }
