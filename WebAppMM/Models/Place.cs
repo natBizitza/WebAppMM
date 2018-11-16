@@ -14,5 +14,6 @@ namespace WebAppMM.Models
         public string Province { get; set; }
         public double Lat { get; set; }
         public double Lng { get; set; }
+        public List<User> Users { get; set; }
     }
 }

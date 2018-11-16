@@ -14,5 +14,6 @@ namespace WebAppMM.Data
         {
         }
         public DbSet<WebAppMM.Models.Place> Places { get; set; }
+        public DbSet<WebAppMM.Models.User> Users { get; set; }
     }
 }

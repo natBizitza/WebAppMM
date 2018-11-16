@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAppMM.Data;
 
 namespace WebAppMM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181116153123_table_users3")]
+    partial class table_users3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -202,7 +204,11 @@ namespace WebAppMM.Data.Migrations
 
                     b.Property<string>("Province");
 
+                    b.Property<int?>("UserID");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("Places");
                 });
@@ -233,11 +239,7 @@ namespace WebAppMM.Data.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<int?>("PlaceID");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("PlaceID");
 
                     b.ToTable("Users");
                 });
@@ -287,11 +289,11 @@ namespace WebAppMM.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("WebAppMM.Models.User", b =>
+            modelBuilder.Entity("WebAppMM.Models.Place", b =>
                 {
-                    b.HasOne("WebAppMM.Models.Place")
-                        .WithMany("Users")
-                        .HasForeignKey("PlaceID");
+                    b.HasOne("WebAppMM.Models.User")
+                        .WithMany("MyPlaces")
+                        .HasForeignKey("UserID");
                 });
 #pragma warning restore 612, 618
         }

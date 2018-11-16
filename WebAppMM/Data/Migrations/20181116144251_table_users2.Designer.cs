@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAppMM.Data;
 
 namespace WebAppMM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181116144251_table_users2")]
+    partial class table_users2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,41 +209,6 @@ namespace WebAppMM.Data.Migrations
                     b.ToTable("Places");
                 });
 
-            modelBuilder.Entity("WebAppMM.Models.User", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AboutMe");
-
-                    b.Property<DateTime>("BirthDate");
-
-                    b.Property<string>("Currency");
-
-                    b.Property<DateTime>("DateOfRegistration");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("Gender");
-
-                    b.Property<string>("LanguagePreferred");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<int?>("PlaceID");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("PlaceID");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -285,13 +252,6 @@ namespace WebAppMM.Data.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("WebAppMM.Models.User", b =>
-                {
-                    b.HasOne("WebAppMM.Models.Place")
-                        .WithMany("Users")
-                        .HasForeignKey("PlaceID");
                 });
 #pragma warning restore 612, 618
         }
