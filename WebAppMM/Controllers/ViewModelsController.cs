@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -11,37 +10,22 @@ using WebAppMM.Models;
 
 namespace WebAppMM.Controllers
 {
-    public class UsersController : Controller
+    public class ViewModelsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public UsersController(ApplicationDbContext context)
+        public ViewModelsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Users
+        // GET: ViewModels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.ToListAsync());
-
+            return View(await _context.ViewModel.ToListAsync());
         }
 
-        //private List<User> GetUsers()
-        //{
-        //    List<User> users = new List<User>();
-           
-        //    return users;
-        //}
-
-
-        //private List<Place> GetPlaces()
-        //{
-        //    List<Place> places = new List<Place>();
-        //    return places;
-        //}
-
-        // GET: Users/Details/5
+        // GET: ViewModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,39 +33,39 @@ namespace WebAppMM.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
+            var viewModel = await _context.ViewModel
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (user == null)
+            if (viewModel == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(viewModel);
         }
 
-        // GET: Users/Create
+        // GET: ViewModels/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: ViewModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,Gender,BirthDate,PhoneNumber,Email,LanguagePreferred,Currency,AboutMe,DateOfRegistration")] User user)
+        public async Task<IActionResult> Create([Bind("ID")] ViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
+                _context.Add(viewModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(viewModel);
         }
 
-        // GET: Users/Edit/5
+        // GET: ViewModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,22 +73,22 @@ namespace WebAppMM.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var viewModel = await _context.ViewModel.FindAsync(id);
+            if (viewModel == null)
             {
                 return NotFound();
             }
-            return View(user);
+            return View(viewModel);
         }
 
-        // POST: Users/Edit/5
+        // POST: ViewModels/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,Gender,BirthDate,PhoneNumber,Email,LanguagePreferred,Currency,AboutMe,DateOfRegistration")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("ID")] ViewModel viewModel)
         {
-            if (id != user.ID)
+            if (id != viewModel.ID)
             {
                 return NotFound();
             }
@@ -113,12 +97,12 @@ namespace WebAppMM.Controllers
             {
                 try
                 {
-                    _context.Update(user);
+                    _context.Update(viewModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.ID))
+                    if (!ViewModelExists(viewModel.ID))
                     {
                         return NotFound();
                     }
@@ -129,10 +113,10 @@ namespace WebAppMM.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(viewModel);
         }
 
-        // GET: Users/Delete/5
+        // GET: ViewModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -140,30 +124,30 @@ namespace WebAppMM.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
+            var viewModel = await _context.ViewModel
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (user == null)
+            if (viewModel == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(viewModel);
         }
 
-        // POST: Users/Delete/5
+        // POST: ViewModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            _context.Users.Remove(user);
+            var viewModel = await _context.ViewModel.FindAsync(id);
+            _context.ViewModel.Remove(viewModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
+        private bool ViewModelExists(int id)
         {
-            return _context.Users.Any(e => e.ID == id);
+            return _context.ViewModel.Any(e => e.ID == id);
         }
     }
 }
