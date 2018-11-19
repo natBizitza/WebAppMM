@@ -1,0 +1,18 @@
+﻿@*//to pass the list*@
+@model IEnumerable<Character>;
+
+@{
+    ViewData["Title"] = "About";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+@*to show thw list*@
+@{
+    foreach (Character character in Model)
+    {
+        <p>@character.Name</p>
+
+    }
+}
+
