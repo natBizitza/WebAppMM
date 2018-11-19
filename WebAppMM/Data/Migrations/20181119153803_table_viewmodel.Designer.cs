@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAppMM.Data;
 
 namespace WebAppMM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181119153803_table_viewmodel")]
+    partial class table_viewmodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -186,7 +188,7 @@ namespace WebAppMM.Data.Migrations
 
             modelBuilder.Entity("WebAppMM.Models.Place", b =>
                 {
-                    b.Property<int>("IDPlace")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -204,7 +206,7 @@ namespace WebAppMM.Data.Migrations
 
                     b.Property<int?>("ViewModelID");
 
-                    b.HasKey("IDPlace");
+                    b.HasKey("ID");
 
                     b.HasIndex("ViewModelID");
 
@@ -213,7 +215,7 @@ namespace WebAppMM.Data.Migrations
 
             modelBuilder.Entity("WebAppMM.Models.User", b =>
                 {
-                    b.Property<int>("IDUser")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -237,13 +239,13 @@ namespace WebAppMM.Data.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<int?>("PlaceIDPlace");
+                    b.Property<int?>("PlaceID");
 
                     b.Property<int?>("ViewModelID");
 
-                    b.HasKey("IDUser");
+                    b.HasKey("ID");
 
-                    b.HasIndex("PlaceIDPlace");
+                    b.HasIndex("PlaceID");
 
                     b.HasIndex("ViewModelID");
 
@@ -317,7 +319,7 @@ namespace WebAppMM.Data.Migrations
                 {
                     b.HasOne("WebAppMM.Models.Place", "Place")
                         .WithMany()
-                        .HasForeignKey("PlaceIDPlace");
+                        .HasForeignKey("PlaceID");
 
                     b.HasOne("WebAppMM.Models.ViewModel")
                         .WithMany("Users")

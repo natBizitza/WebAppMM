@@ -34,7 +34,7 @@ namespace WebAppMM.Controllers
             }
 
             var place = await _context.Places
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.IDPlace == id);
             if (place == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace WebAppMM.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Country,City,PostalCode,Province,Lat,Lng")] Place place)
         {
-            if (id != place.ID)
+            if (id != place.IDPlace)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace WebAppMM.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PlaceExists(place.ID))
+                    if (!PlaceExists(place.IDPlace))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace WebAppMM.Controllers
             }
 
             var place = await _context.Places
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.IDPlace == id);
             if (place == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace WebAppMM.Controllers
 
         private bool PlaceExists(int id)
         {
-            return _context.Places.Any(e => e.ID == id);
+            return _context.Places.Any(e => e.IDPlace == id);
         }
     }
 }

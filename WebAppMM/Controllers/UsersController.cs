@@ -50,7 +50,7 @@ namespace WebAppMM.Controllers
             }
 
             var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.IDUser == id);
             if (user == null)
             {
                 return NotFound();
@@ -104,7 +104,7 @@ namespace WebAppMM.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,Gender,BirthDate,PhoneNumber,Email,LanguagePreferred,Currency,AboutMe,DateOfRegistration")] User user)
         {
-            if (id != user.ID)
+            if (id != user.IDUser)
             {
                 return NotFound();
             }
@@ -118,7 +118,7 @@ namespace WebAppMM.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.ID))
+                    if (!UserExists(user.IDUser))
                     {
                         return NotFound();
                     }
@@ -141,7 +141,7 @@ namespace WebAppMM.Controllers
             }
 
             var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.IDUser == id);
             if (user == null)
             {
                 return NotFound();
@@ -163,7 +163,7 @@ namespace WebAppMM.Controllers
 
         private bool UserExists(int id)
         {
-            return _context.Users.Any(e => e.ID == id);
+            return _context.Users.Any(e => e.IDUser == id);
         }
     }
 }

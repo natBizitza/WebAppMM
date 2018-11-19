@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,7 +8,8 @@ namespace WebAppMM.Models
 {
     public class User
     {
-        public int ID { get; set; }
+        [Key]
+        public int IDUser { get; set; }
         public string  FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
@@ -18,5 +20,6 @@ namespace WebAppMM.Models
         public string Currency { get; set; }
         public string AboutMe { get; set; }
         public DateTime DateOfRegistration { get; set; }
+        public List<Place> Places { get; set; }
     }
 }
