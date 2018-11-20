@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Protocols;
 using WebAppMM.Data;
 using WebAppMM.Models;
 
@@ -21,18 +23,43 @@ namespace WebAppMM.Controllers
         }
 
         // GET: Users
-        public async Task<IActionResult> Index()
+        public Task<IActionResult> Index()
         {
-            return View(await _context.Users.ToListAsync());
+            dynamic model = new ExpandoObject();
+            model.Place = GetPlaces();
+            return View(model);
+            //return View(await _context.Users.ToListAsync());
 
         }
 
-        //private List<User> GetUsers()
-        //{
-        //    List<User> users = new List<User>();
-           
-        //    return users;
-        //}
+        private static List<User> GetPlaces()
+        {
+            List<Place> places = new List<Place>();
+            string query = "SELECT CustomerID, ContactName, City, Country FROM Customers";
+            string constr = ConfigurationManager.ConnectionStrings["Constring"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand(query))
+                {
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        while (sdr.Read())
+                        {
+                            places.Add(new Place
+                            {
+                                //IDPlace = sdr["IDPlace"].ToString(),
+                                Country = sdr["Country"].ToString(),
+                                City = sdr["City"].ToString(),
+                            });
+                        }
+                    }
+                    con.Close();
+                    return places;
+                }
+            }
+        }
 
 
         //private List<Place> GetPlaces()
