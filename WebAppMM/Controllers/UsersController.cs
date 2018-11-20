@@ -16,6 +16,8 @@ namespace WebAppMM.Controllers
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private object db;
+        private User user;
 
         public UsersController(ApplicationDbContext context)
         {
@@ -23,52 +25,13 @@ namespace WebAppMM.Controllers
         }
 
         // GET: Users
-        public Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
-            dynamic model = new ExpandoObject();
-            model.Place = GetPlaces();
-            return View(model);
-            //return View(await _context.Users.ToListAsync());
+            return View(await _context.Users.ToListAsync());
 
         }
 
-        private static List<User> GetPlaces()
-        {
-            List<Place> places = new List<Place>();
-            string query = "SELECT CustomerID, ContactName, City, Country FROM Customers";
-            string constr = ConfigurationManager.ConnectionStrings["Constring"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                using (SqlCommand cmd = new SqlCommand(query))
-                {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (SqlDataReader sdr = cmd.ExecuteReader())
-                    {
-                        while (sdr.Read())
-                        {
-                            places.Add(new Place
-                            {
-                                //IDPlace = sdr["IDPlace"].ToString(),
-                                Country = sdr["Country"].ToString(),
-                                City = sdr["City"].ToString(),
-                            });
-                        }
-                    }
-                    con.Close();
-                    return places;
-                }
-            }
-        }
-
-
-        //private List<Place> GetPlaces()
-        //{
-        //    List<Place> places = new List<Place>();
-        //    return places;
-        //}
-
-        // GET: Users/Details/5
+       
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -77,7 +40,7 @@ namespace WebAppMM.Controllers
             }
 
             var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.IDUser == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (user == null)
             {
                 return NotFound();
@@ -87,9 +50,15 @@ namespace WebAppMM.Controllers
         }
 
         // GET: Users/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+
+            ViewModel viewModel = new ViewModel();
+            viewModel.User = null;
+            viewModel.Places = await _context.Places.ToListAsync();
+
+            return View(viewModel);
+
         }
 
         // POST: Users/Create
@@ -105,7 +74,12 @@ namespace WebAppMM.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+
+            ViewModel viewModel = new ViewModel();
+            viewModel.User = user;
+            viewModel.Places = await _context.Places.ToListAsync();
+
+            return View(viewModel);
         }
 
         // GET: Users/Edit/5
@@ -116,12 +90,16 @@ namespace WebAppMM.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users.FindAsync(id);
+            User user = await _context.Users.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
-            return View(user);
+            ViewModel viewModel = new ViewModel();
+            viewModel.User = user;
+            viewModel.Places = await _context.Places.ToListAsync();
+
+            return View(viewModel);
         }
 
         // POST: Users/Edit/5
@@ -131,7 +109,7 @@ namespace WebAppMM.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,Gender,BirthDate,PhoneNumber,Email,LanguagePreferred,Currency,AboutMe,DateOfRegistration")] User user)
         {
-            if (id != user.IDUser)
+            if (id != user.ID)
             {
                 return NotFound();
             }
@@ -145,7 +123,7 @@ namespace WebAppMM.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.IDUser))
+                    if (!UserExists(user.ID))
                     {
                         return NotFound();
                     }
@@ -168,7 +146,7 @@ namespace WebAppMM.Controllers
             }
 
             var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.IDUser == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (user == null)
             {
                 return NotFound();
@@ -190,7 +168,7 @@ namespace WebAppMM.Controllers
 
         private bool UserExists(int id)
         {
-            return _context.Users.Any(e => e.IDUser == id);
+            return _context.Users.Any(e => e.ID == id);
         }
     }
 }

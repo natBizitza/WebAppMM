@@ -1,15 +1,10 @@
-﻿@model WebAppMM.Models.User
-@inject IServiceProvider provider;
-@*@using ViewModels.Models;*@
-@*@model ViewModel*@
+﻿@model WebAppMM.Models.ViewModel
+
+*@using WebAppMM.Models;
+
 
 @{
     ViewData["Title"] = "Create";
-    //WebAppMM.Data.ApplicationDbContext _context = new WebAppMM.Data.ApplicationDbContext().Places;
-    //                         using (var context = _context)
-    //                        {
-
-    //                        }
 }
 
 <h2>Create</h2>
@@ -21,71 +16,67 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+                <label asp-for="User.FirstName" class="control-label"></label>
+                <input asp-for="User.FirstName" class="form-control" />
+                <span asp-validation-for="User.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+                <label asp-for="User.LastName" class="control-label"></label>
+                <input asp-for="User.LastName" class="form-control" />
+                <span asp-validation-for="User.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label class="control-label">My Country:</label>
                 <select>
-                    @{
-
-
+                    @foreach (Place place in Model.Places)
+                    {
+                        <option value="@place.Country">@place.Country</option>
                     }
                 </select>
                 @*Users.Where(place => place.Country).ToList();*@
 
                 @*<label asp-for="Country" class="control-label"></label>
-                    <span asp-validation-for="FirstName" class="text-danger"></span>*@
+        <span asp-validation-for="FirstName" class="text-danger"></span>*@
             </div>
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+                <label asp-for="User.Gender" class="control-label"></label>
+                <input asp-for="User.Gender" class="form-control" />
+                <span asp-validation-for="User.Gender" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Gender" class="control-label"></label>
-                <input asp-for="Gender" class="form-control" />
-                <span asp-validation-for="Gender" class="text-danger"></span>
+                <label asp-for="User.BirthDate" class="control-label"></label>
+                <input asp-for="User.BirthDate" class="form-control" />
+                <span asp-validation-for="User.BirthDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BirthDate" class="control-label"></label>
-                <input asp-for="BirthDate" class="form-control" />
-                <span asp-validation-for="BirthDate" class="text-danger"></span>
+                <label asp-for="User.PhoneNumber" class="control-label"></label>
+                <input asp-for="User.PhoneNumber" class="form-control" />
+                <span asp-validation-for="User.PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                <label asp-for="User.Email" class="control-label"></label>
+                <input asp-for="User.Email" class="form-control" />
+                <span asp-validation-for="User.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <label asp-for="User.LanguagePreferred" class="control-label"></label>
+                <input asp-for="User.LanguagePreferred" class="form-control" />
+                <span asp-validation-for="User.LanguagePreferred" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LanguagePreferred" class="control-label"></label>
-                <input asp-for="LanguagePreferred" class="form-control" />
-                <span asp-validation-for="LanguagePreferred" class="text-danger"></span>
+                <label asp-for="User.Currency" class="control-label"></label>
+                <input asp-for="User.Currency" class="form-control" />
+                <span asp-validation-for="User.Currency" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Currency" class="control-label"></label>
-                <input asp-for="Currency" class="form-control" />
-                <span asp-validation-for="Currency" class="text-danger"></span>
+                <label asp-for="User.AboutMe" class="control-label"></label>
+                <input asp-for="User.AboutMe" class="form-control" />
+                <span asp-validation-for="User.AboutMe" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AboutMe" class="control-label"></label>
-                <input asp-for="AboutMe" class="form-control" />
-                <span asp-validation-for="AboutMe" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateOfRegistration" class="control-label"></label>
-                <input asp-for="DateOfRegistration" class="form-control" />
-                <span asp-validation-for="DateOfRegistration" class="text-danger"></span>
+                <label asp-for="User.DateOfRegistration" class="control-label"></label>
+                <input asp-for="User.DateOfRegistration" class="form-control" />
+                <span asp-validation-for="User.DateOfRegistration" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
