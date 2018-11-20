@@ -1,4 +1,4 @@
-﻿@model WebAppMM.Models.ViewModel
+﻿@model System.Collections.Generic.IEnumerable<WebAppMM.Models.ViewModel>
 @using WebAppMM.Models;
 
 @{
@@ -53,51 +53,57 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in ViewModel.User)
+        @foreach (ViewModel item in IEnumerable<ViewModel>)
         {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.User.FirstName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.User.LastName)
-    </td>
-    @*<td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>*@
-    <td>
-        @Html.DisplayFor(modelItem => item.User.Gender)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.User.BirthDate)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.User.PhoneNumber)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.User.Email)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.User.LanguagePreferred)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.User.Currency)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.User.AboutMe)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.User.DateOfRegistration)
-    </td>
-    <td>
-        <a asp-action="Edit" asp-route-id="@item.User.ID">Edit</a> |
-        <a asp-action="Details" asp-route-id="@item.User.ID">Details</a> |
-        <a asp-action="Delete" asp-route-id="@item.User.ID">Delete</a>
-    </td>
-</tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.LastName)
+            </td>
+            @foreach (Place place in item.Places)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => place.Country)
+                </td>
+            }
+            @foreach (Place place in item.Places)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => place.City)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.BirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.LanguagePreferred)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Currency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.AboutMe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.DateOfRegistration)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.User.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.User.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.User.ID">Delete</a>
+            </td>
+            </tr>
 }
     </tbody>
 </table>
