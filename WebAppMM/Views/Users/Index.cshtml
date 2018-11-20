@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WebAppMM.Models.User>
+﻿@model WebAppMM.Models.ViewModel
+@using WebAppMM.Models;
 
 @{
     ViewData["Title"] = "Index";
@@ -13,83 +14,90 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.DisplayNameFor(model => model.User.FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                @Html.DisplayNameFor(model => model.User.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Gender)
+                @Html.DisplayNameFor(model => model.Places)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BirthDate)
+                @Html.DisplayNameFor(model => model.Places)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
+                @Html.DisplayNameFor(model => model.User.Gender)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.User.BirthDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LanguagePreferred)
+                @Html.DisplayNameFor(model => model.User.PhoneNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Currency)
+                @Html.DisplayNameFor(model => model.User.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AboutMe)
+                @Html.DisplayNameFor(model => model.User.LanguagePreferred)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateOfRegistration)
+                @Html.DisplayNameFor(model => model.User.Currency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.AboutMe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.DateOfRegistration)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Gender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BirthDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LanguagePreferred)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Currency)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AboutMe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfRegistration)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
+        @foreach (var item in ViewModel.User)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.User.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.User.LastName)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.User.Gender)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.User.BirthDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.User.PhoneNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.User.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.User.LanguagePreferred)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.User.Currency)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.User.AboutMe)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.User.DateOfRegistration)
+    </td>
+    <td>
+        <a asp-action="Edit" asp-route-id="@item.User.ID">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.User.ID">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.User.ID">Delete</a>
+    </td>
+</tr>
 }
     </tbody>
 </table>
