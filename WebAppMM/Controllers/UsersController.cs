@@ -27,7 +27,7 @@ namespace WebAppMM.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            List<User> users = await _context.Users.ToListAsync();
+            List<User> users = await _context.Users.Include(x=>x.Places).ToListAsync();
             List<Place> places = await _context.Places.ToListAsync();
             List<ViewModel> userViewModels = new List<ViewModel>();
 
