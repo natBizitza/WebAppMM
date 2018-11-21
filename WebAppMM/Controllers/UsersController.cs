@@ -27,19 +27,20 @@ namespace WebAppMM.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            List<User> users = await _context.Users.Include(x=>x.Places).ToListAsync();
-            List<Place> places = await _context.Places.ToListAsync();
-            List<ViewModel> userViewModels = new List<ViewModel>();
+            //List<User> users = await _context.Users.Include(x=>x.Places).ToListAsync();
+            //List<Place> places = await _context.Places.ToListAsync();
+            //List<ViewModel> userViewModels = new List<ViewModel>();
+            
 
-            foreach (User user in users)
-            {
-                ViewModel viewModel = new ViewModel();
-                viewModel.User = user;
-                viewModel.Places = places;
-                userViewModels.Add(viewModel);
-            }
-
-            return View(userViewModels);
+            //foreach (User user in users)
+            //{
+            //    ViewModel viewModel = new ViewModel();
+            //    viewModel.User = user;
+            //    viewModel.Places = places;
+            //    userViewModels.Add(viewModel);
+            //}
+            
+            return View(await _context.ViewModel.Include(x => x.Places).ToListAsync());
 
         }
 
