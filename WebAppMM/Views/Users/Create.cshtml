@@ -26,7 +26,7 @@
                 <span asp-validation-for="User.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label @*asp-for="Country"*@ class="control-label">My Country:</label>
+                <label asp-for="User.Place" class="control-label">My Country:</label>
                 <select>
                     @foreach (Place place in Model.Places)
                     {

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAppMM.Data;
 
 namespace WebAppMM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181122111400_viewmodel9")]
+    partial class viewmodel9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -202,9 +204,13 @@ namespace WebAppMM.Data.Migrations
 
                     b.Property<string>("Province");
 
+                    b.Property<int?>("UserID");
+
                     b.Property<int?>("ViewModelID");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("UserID");
 
                     b.HasIndex("ViewModelID");
 
@@ -238,11 +244,7 @@ namespace WebAppMM.Data.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<int?>("PlaceID");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("PlaceID");
 
                     b.ToTable("Users");
                 });
@@ -253,9 +255,13 @@ namespace WebAppMM.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("PlaceID");
+
                     b.Property<int?>("UserID");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("PlaceID");
 
                     b.HasIndex("UserID");
 
@@ -309,20 +315,21 @@ namespace WebAppMM.Data.Migrations
 
             modelBuilder.Entity("WebAppMM.Models.Place", b =>
                 {
+                    b.HasOne("WebAppMM.Models.User")
+                        .WithMany("Places")
+                        .HasForeignKey("UserID");
+
                     b.HasOne("WebAppMM.Models.ViewModel")
                         .WithMany("Places")
                         .HasForeignKey("ViewModelID");
                 });
 
-            modelBuilder.Entity("WebAppMM.Models.User", b =>
+            modelBuilder.Entity("WebAppMM.Models.ViewModel", b =>
                 {
                     b.HasOne("WebAppMM.Models.Place", "Place")
                         .WithMany()
                         .HasForeignKey("PlaceID");
-                });
 
-            modelBuilder.Entity("WebAppMM.Models.ViewModel", b =>
-                {
                     b.HasOne("WebAppMM.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserID");

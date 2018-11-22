@@ -11,7 +11,6 @@ namespace WebAppMM.Models
         [Key]
         public int ID { get; set; }
         public User User { get; set; }
-        public Place Place { get; set; }
 
         public IEnumerable<Place> Places { get; set; }
     }
