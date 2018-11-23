@@ -36,7 +36,13 @@
                     @{
                         if (User.Identity.IsAuthenticated)
                         {
-                            if (User.HasClaim("admin", "admin"))
+                            @*if (User.HasClaim("admin", "admin"))
+                {
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                }*@
+
+                            //What is the difference between them?above and below
+                            if (User.IsInRole("admin"))
                             {
                                 <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                             }

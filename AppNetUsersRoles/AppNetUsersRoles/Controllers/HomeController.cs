@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AppNetUsersRoles.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AppNetUsersRoles.Controllers
 {
@@ -22,6 +23,8 @@ namespace AppNetUsersRoles.Controllers
             return View();
         }
 
+        //permissions to the admin
+        [Authorize(Roles="admin")]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

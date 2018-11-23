@@ -19,7 +19,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.User.LastName)
             </th>
-            @foreach (Place place in IEnumerable<Place>)
+            @foreach (Place place in Model.Places)
             {
                 <th>
                     @Html.DisplayNameFor(model => place.Country)
