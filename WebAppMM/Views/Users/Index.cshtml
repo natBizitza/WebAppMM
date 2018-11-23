@@ -23,18 +23,27 @@
             {
                 @foreach (Place place in viewModel.Places)
                 {
-                    <p>
-                        @place.City - @place.Country
-                    </p>
+            <th>
+                @if (viewModel.User.Place.ID == place.ID)
+                {
+                @place.City
+
+                @*@place => place.Country.User*@
+                }
+            </th>
                 }
             }
 
+            @foreach (ViewModel viewModel in Model)
+            {
+                @foreach (Place place in viewModel.Places)
+                {
             <th>
-                @Html.DisplayNameFor(model => model.Places)
+                @place => place.City.User
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Places)
-            </th>
+                }
+            }
+          
             <th>
                 @Html.DisplayNameFor(model => model.User.Gender)
             </th>
@@ -72,18 +81,25 @@
             <td>
                 @Html.DisplayFor(modelItem => item.User.LastName)
             </td>
-            @*@foreach (Place place in item.Places)
+            @foreach (ViewModel viewModel in Model)
             {
-                <td>
-                    @Html.DisplayFor(modelItem => place.Country)
-                </td>
+                @foreach (Place place in viewModel.Places)
+                {
+            <td>
+                @Html.DisplayFor(modelItem => place.Country)
+            </td>
+                }
             }
-            @foreach (Place place in item.Places)
+
+            @foreach (ViewModel viewModel in Model)
             {
-                <td>
-                    @Html.DisplayFor(modelItem => place.City)
-                </td>
-            }*@
+                @foreach (Place place in viewModel.Places)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => place.City)
+                    </td>
+                }
+            }
 
             <td>
                 @Html.DisplayFor(modelItem => item.User.Gender)
