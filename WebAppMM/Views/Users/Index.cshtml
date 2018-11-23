@@ -19,18 +19,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.User.LastName)
             </th>
-            @foreach (Place place in Model.Places)
+            @foreach (ViewModel viewModel in Model)
             {
-                <th>
-                    @Html.DisplayNameFor(model => place.Country)
-                </th>
+                @foreach (Place place in viewModel.Places)
+                {
+                    <p>
+                        @place.City - @place.Country
+                    </p>
+                }
             }
-            @foreach (Place place in Places)
-            {
-                <th>
-                    @Html.DisplayNameFor(model => place.City)
-                </th>
-            }
+
             <th>
                 @Html.DisplayNameFor(model => model.Places)
             </th>
@@ -74,7 +72,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.User.LastName)
             </td>
-            @foreach (Place place in item.Places)
+            @*@foreach (Place place in item.Places)
             {
                 <td>
                     @Html.DisplayFor(modelItem => place.Country)
@@ -85,7 +83,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => place.City)
                 </td>
-            }
+            }*@
 
             <td>
                 @Html.DisplayFor(modelItem => item.User.Gender)
