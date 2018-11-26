@@ -219,6 +219,8 @@ namespace WebAppMM.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ID");
+
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -272,6 +274,14 @@ namespace WebAppMM.Data.Migrations
                     b.HasOne("WebAppMM.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WebAppMM.Models.User", b =>
+                {
+                    b.HasOne("WebAppMM.Models.Place", "Place")
+                        .WithMany()
+                        .HasForeignKey("ID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -52,12 +52,13 @@ namespace WebAppMM.Areas.Identity.Pages.Account
             [Display(Name = "Gender")]
             public string Gender { get; set; }
 
-            [DataType(DataType.Text)]
+            [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
             [Display(Name = "Birth Date")]
             public DateTime BirthDate { get; set; }
 
             [DataType(DataType.Text)]
-            [Display(Name = "Phone NUmber")]
+            [Display(Name = "Phone Number")]
             public string PhoneNumber { get; set; }
 
             [DataType(DataType.Text)]
@@ -67,6 +68,10 @@ namespace WebAppMM.Areas.Identity.Pages.Account
             [DataType(DataType.Text)]
             [Display(Name = "Currency")]
             public string Currency { get; set; }
+
+            [DataType(DataType.Text)]
+            [Display(Name = "About Me")]
+            public string AboutMe { get; set; }
 
             [Required]
             [EmailAddress]
@@ -95,7 +100,22 @@ namespace WebAppMM.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = Input.Email, Email = Input.Email };
+                //var user = new User { UserName = Input.Email, Email = Input.Email };
+
+                var user = new User
+                {
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    Gender = Input.Gender,
+                    BirthDate = Input.BirthDate,
+                    PhoneNumber = Input.PhoneNumber,
+                    LanguagePreferred = Input.LanguagePreferred,
+                    Currency = Input.Currency,
+                    AboutMe = Input.AboutMe
+                };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

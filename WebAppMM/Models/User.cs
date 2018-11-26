@@ -33,6 +33,6 @@ namespace WebAppMM.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfRegistration { get; set; }
-        //public Place Place { get; set; }
+        public Place Place { get; set; }
     }
 }
