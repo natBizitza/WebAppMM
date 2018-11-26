@@ -186,8 +186,6 @@ namespace WebAppMM.Data.Migrations
                     b.Property<string>("Gender")
                         .IsRequired();
 
-                    b.Property<int>("ID");
-
                     b.Property<string>("LanguagePreferred");
 
                     b.Property<string>("LastName");
@@ -216,8 +214,6 @@ namespace WebAppMM.Data.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ID");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -272,14 +268,6 @@ namespace WebAppMM.Data.Migrations
                     b.HasOne("WebAppMM.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("WebAppMM.Models.User", b =>
-                {
-                    b.HasOne("WebAppMM.Models.Place", "Place")
-                        .WithMany()
-                        .HasForeignKey("ID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

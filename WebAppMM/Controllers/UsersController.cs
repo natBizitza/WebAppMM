@@ -39,8 +39,8 @@ namespace WebAppMM.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.ID == id);
+            //var user = await _context.Users
+            //    .FirstOrDefaultAsync(m => m.ID == id);
             if (user == null)
             {
                 return NotFound();
@@ -62,7 +62,7 @@ namespace WebAppMM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,Gender,BirthDate,PhoneNumber,Email,LanguagePreferred,Currency,AboutMe,DateOfRegistration")] User user)
+        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,Gender,BirthDate,PhoneNumber,Email,LanguagePreferred,Currency,AboutMe")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -93,31 +93,31 @@ namespace WebAppMM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,Gender,BirthDate,PhoneNumber,Email,LanguagePreferred,Currency,AboutMe,DateOfRegistration")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,Gender,BirthDate,PhoneNumber,Email,LanguagePreferred,Currency,AboutMe")] User user)
         {
-            if (id != user.ID)
-            {
-                return NotFound();
-            }
+            //if (id != user.ID)
+            //{
+            //    return NotFound();
+            //}
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(user.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                //try
+                //{
+                //    _context.Update(user);
+                //    await _context.SaveChangesAsync();
+                //}
+                //catch (DbUpdateConcurrencyException)
+                //{
+                //    if (!UserExists(user.ID))
+                //    {
+                //        return NotFound();
+                //    }
+                //    else
+                //    {
+                //        throw;
+                //    }
+                //}
                 return RedirectToAction(nameof(Index));
             }
             return View(user);
@@ -131,12 +131,12 @@ namespace WebAppMM.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            //var user = await _context.Users
+            //    .FirstOrDefaultAsync(m => m.ID == id);
+            //if (user == null)
+            //{
+            //    return NotFound();
+            //}
 
             return View(user);
         }
@@ -152,9 +152,9 @@ namespace WebAppMM.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.ID == id);
-        }
+        //private bool UserExists(int id)
+        //{
+        //    return _context.Users.Any(e => e.ID == id);
+        //}
     }
 }

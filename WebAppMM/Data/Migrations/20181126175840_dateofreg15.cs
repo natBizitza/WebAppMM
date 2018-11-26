@@ -2,7 +2,7 @@
 
 namespace WebAppMM.Data.Migrations
 {
-    public partial class _1 : Migration
+    public partial class dateofreg15 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
