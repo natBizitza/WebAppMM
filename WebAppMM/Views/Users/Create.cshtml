@@ -1,4 +1,5 @@
-﻿@model WebAppMM.Models.ViewModel
+﻿@model WebAppMM.Models.User
+@using WebAppMM.Data
 
 @using WebAppMM.Models;
 
@@ -11,86 +12,7 @@
 
 <h4>User</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="User.FirstName" class="control-label"></label>
-                <input asp-for="User.FirstName" class="form-control" />
-                <span asp-validation-for="User.FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.LastName" class="control-label"></label>
-                <input asp-for="User.LastName" class="form-control" />
-                <span asp-validation-for="User.LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.Place" class="control-label">My Country:</label>
-                <select>
-                    @foreach (Place place in Model.Places)
-                    {
-                        <option value="@place.Country">@place.Country</option>
-                    }
-                </select>
-                <span class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label @*asp-for="City"*@ class="control-label">My City:</label>
-                <select>
-                    @foreach (Place place in Model.Places)
-                    {
-                        <option value="@place.City">@place.City</option>
-                    }
-                </select>
-                <span class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.Gender" class="control-label"></label>
-                <input asp-for="User.Gender" class="form-control" />
-                <span asp-validation-for="User.Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.BirthDate" class="control-label"></label>
-                <input asp-for="User.BirthDate" class="form-control" />
-                <span asp-validation-for="User.BirthDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.PhoneNumber" class="control-label"></label>
-                <input asp-for="User.PhoneNumber" class="form-control" />
-                <span asp-validation-for="User.PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.Email" class="control-label"></label>
-                <input asp-for="User.Email" class="form-control" />
-                <span asp-validation-for="User.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.LanguagePreferred" class="control-label"></label>
-                <input asp-for="User.LanguagePreferred" class="form-control" />
-                <span asp-validation-for="User.LanguagePreferred" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.Currency" class="control-label"></label>
-                <input asp-for="User.Currency" class="form-control" />
-                <span asp-validation-for="User.Currency" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.AboutMe" class="control-label"></label>
-                <input asp-for="User.AboutMe" class="form-control" />
-                <span asp-validation-for="User.AboutMe" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.DateOfRegistration" class="control-label"></label>
-                <input asp-for="User.DateOfRegistration" class="form-control" />
-                <span asp-validation-for="User.DateOfRegistration" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
-</div>
+
 
 <div>
     <a asp-action="Index">Back to List</a>

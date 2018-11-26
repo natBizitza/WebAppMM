@@ -7,7 +7,7 @@ using WebAppMM.Models;
 
 namespace WebAppMM.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<User, ApplicationRole, string>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -15,6 +15,5 @@ namespace WebAppMM.Data
         }
         public DbSet<WebAppMM.Models.Place> Places { get; set; }
         public DbSet<WebAppMM.Models.User> Users { get; set; }
-        public DbSet<WebAppMM.Models.ViewModel> ViewModel { get; set; }
     }
 }

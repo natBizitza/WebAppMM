@@ -5,11 +5,16 @@ using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebAppMM.Models
 {
-    public class User
+    public class User : IdentityUser
     {
+        public User() : base()
+        {
+
+        }
         //[Key]
         public int ID { get; set; }
         public string  FirstName { get; set; }
@@ -28,6 +33,6 @@ namespace WebAppMM.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfRegistration { get; set; }
-        public Place Place { get; set; }
+        //public Place Place { get; set; }
     }
 }

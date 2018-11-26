@@ -27,20 +27,7 @@ namespace WebAppMM.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            List<User> users = await _context.Users.Include(x => x.Place).ToListAsync();
-            List<Place> places = await _context.Places.ToListAsync();
-            List<ViewModel> userViewModels = new List<ViewModel>();
-
-
-            foreach (User user in users)
-            {
-                ViewModel viewModel = new ViewModel();
-                viewModel.User = user;
-                viewModel.Places = places;
-                userViewModels.Add(viewModel);
-            }
-
-            return View(userViewModels);
+            return View(await _context.Users.ToListAsync());
 
         }
 
@@ -66,11 +53,7 @@ namespace WebAppMM.Controllers
         public async Task<IActionResult> Create()
         {
 
-            ViewModel viewModel = new ViewModel();
-            viewModel.User = null;
-            viewModel.Places = await _context.Places.ToListAsync();
-
-            return View(viewModel);
+            return View();
 
         }
 
@@ -87,12 +70,7 @@ namespace WebAppMM.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
-            ViewModel viewModel = new ViewModel();
-            viewModel.User = user;
-            viewModel.Places = await _context.Places.ToListAsync();
-
-            return View(viewModel);
+            return View(user);
         }
 
         // GET: Users/Edit/5
@@ -102,17 +80,12 @@ namespace WebAppMM.Controllers
             {
                 return NotFound();
             }
-
-            User user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
-            ViewModel viewModel = new ViewModel();
-            viewModel.User = user;
-            viewModel.Places = await _context.Places.ToListAsync();
-
-            return View(viewModel);
+            return View(user);
         }
 
         // POST: Users/Edit/5
