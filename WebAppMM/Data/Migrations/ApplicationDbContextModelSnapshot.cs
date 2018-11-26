@@ -176,8 +176,6 @@ namespace WebAppMM.Data.Migrations
 
                     b.Property<string>("Currency");
 
-                    b.Property<DateTime>("DateOfRegistration");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 

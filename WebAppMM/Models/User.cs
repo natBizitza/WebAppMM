@@ -30,9 +30,9 @@ namespace WebAppMM.Models
         public string LanguagePreferred { get; set; }
         public string Currency { get; set; }
         public string AboutMe { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime DateOfRegistration { get; set; }
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        //public DateTime DateOfRegistration { get; set; }
         public Place Place { get; set; }
     }
 }

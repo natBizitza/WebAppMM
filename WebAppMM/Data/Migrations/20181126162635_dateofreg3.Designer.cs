@@ -10,8 +10,8 @@ using WebAppMM.Data;
 namespace WebAppMM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181126153310_identityChanges12")]
-    partial class identityChanges12
+    [Migration("20181126162635_dateofreg3")]
+    partial class dateofreg3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -177,8 +177,6 @@ namespace WebAppMM.Data.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Currency");
-
-                    b.Property<DateTime>("DateOfRegistration");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
