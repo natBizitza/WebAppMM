@@ -7,7 +7,7 @@ using WebAppMM.Models;
 
 namespace WebAppMM.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User, ApplicationRole, string>
+    public class ApplicationDbContext : IdentityDbContext<ASPUser, ApplicationRole, string>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

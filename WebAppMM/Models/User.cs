@@ -10,14 +10,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAppMM.Models
 {
-    public class User : IdentityUser
+    public class User 
     {
-        public User() : base()
-        {
-
-        }
-        //[Key]
-        //public int ID { get; set; }
+        [Key]
+        public int ID { get; set; }
         public string  FirstName { get; set; }
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
@@ -26,14 +22,14 @@ namespace WebAppMM.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime BirthDate { get; set; }
-        //public string PhoneNumber { get; set; }
-        //public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
         public string LanguagePreferred { get; set; }
         public string Currency { get; set; }
         public string AboutMe { get; set; }
-        //[DataType(DataType.Date)]
-        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        //public DateTime DateOfRegistration { get; set; }
-        //public Place Place { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime DateOfRegistration { get; set; }
+        public Place Place { get; set; }
     }
 }
